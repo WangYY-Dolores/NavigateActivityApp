@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 
 
-class MainActivity5 : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
+class east : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
     private lateinit var gestureDetector: GestureDetector
     private lateinit var pic: ImageView
     private var sensorManager: SensorManager ?= null
@@ -27,7 +27,7 @@ class MainActivity5 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
     var x:Float = 0.0f
     var y:Float = 0.0f
     var z:Float = 0.0f
-    var threshold:Float = 3000.0f
+    var threshold:Float = 1000.0f
     var time:Long = 0
     companion object{
         const val MIN_DISTANCE = 150
@@ -35,11 +35,11 @@ class MainActivity5 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main5)
+        setContentView(R.layout.east)
         gestureDetector = GestureDetector(this, this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        pic = findViewById(R.id.south)
+        pic = findViewById(R.id.east)
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
@@ -49,7 +49,7 @@ class MainActivity5 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
         when (ev.action) {
             MotionEvent.ACTION_DOWN->{
                 x1 = ev.x
-                y1 = ev.y
+                x2 = ev.y
             }
             MotionEvent.ACTION_UP->{
                 x2 = ev.x
@@ -58,11 +58,11 @@ class MainActivity5 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
                 val valX: Float = x2 - x1
                 val valY: Float = y2 - y1
 
-                if (Math.abs(valY) > MIN_DISTANCE) {
-                    if (y2 > y1) {
-                        moveToHome()
-                    } else if (y1 > y2) {
+                if (Math.abs(valX) > MIN_DISTANCE) {
+                    if (x2 > x1) {
                         Toast.makeText(this,"Action not Allowed",Toast.LENGTH_LONG).show()
+                    } else if (x1>x2) {
+                        moveToHome()
                     }
                 }
             }
@@ -113,7 +113,7 @@ class MainActivity5 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
     }
 
     private fun moveToHome() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, home::class.java))
         finish()
     }
 

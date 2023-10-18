@@ -13,19 +13,19 @@
         android:theme="@style/Theme.NavigateActivityApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity5"
+            android:name=".south"
             android:exported="false" />
         <activity
-            android:name=".MainActivity4"
+            android:name=".north"
             android:exported="false" />
         <activity
-            android:name=".MainActivity3"
+            android:name=".west"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".east"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 
 
-class MainActivity3 : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
+class west : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
     private lateinit var gestureDetector: GestureDetector
     private lateinit var pic: ImageView
     private var sensorManager: SensorManager ?= null
@@ -35,7 +35,7 @@ class MainActivity3 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main3)
+        setContentView(R.layout.west)
         gestureDetector = GestureDetector(this, this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -60,9 +60,9 @@ class MainActivity3 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
 
                 if (Math.abs(valX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Toast.makeText(this,"Action not Allowed",Toast.LENGTH_LONG).show()
-                    } else if (x1>x2) {
                         moveToHome()
+                    } else if (x1>x2) {
+                        Toast.makeText(this,"Action not Allowed",Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -113,7 +113,7 @@ class MainActivity3 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
     }
 
     private fun moveToHome() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, home::class.java))
         finish()
     }
 

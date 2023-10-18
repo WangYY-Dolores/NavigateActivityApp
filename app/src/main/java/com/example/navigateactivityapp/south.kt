@@ -12,10 +12,9 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet.Motion
 
 
-class MainActivity4 : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
+class south : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
     private lateinit var gestureDetector: GestureDetector
     private lateinit var pic: ImageView
     private var sensorManager: SensorManager ?= null
@@ -36,11 +35,11 @@ class MainActivity4 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main4)
+        setContentView(R.layout.south)
         gestureDetector = GestureDetector(this, this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        pic = findViewById(R.id.north)
+        pic = findViewById(R.id.south)
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
@@ -61,9 +60,9 @@ class MainActivity4 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
 
                 if (Math.abs(valY) > MIN_DISTANCE) {
                     if (y2 > y1) {
-                        Toast.makeText(this,"Action not Allowed",Toast.LENGTH_LONG).show()
-                    } else if (y1 > y2) {
                         moveToHome()
+                    } else if (y1 > y2) {
+                        Toast.makeText(this,"Action not Allowed",Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -114,7 +113,7 @@ class MainActivity4 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
     }
 
     private fun moveToHome() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, home::class.java))
         finish()
     }
 

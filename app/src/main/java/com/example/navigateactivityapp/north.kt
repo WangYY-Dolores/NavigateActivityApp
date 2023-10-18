@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 
 
-class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
+class north : AppCompatActivity(), GestureDetector.OnGestureListener, SensorEventListener {
     private lateinit var gestureDetector: GestureDetector
     private lateinit var pic: ImageView
     private var sensorManager: SensorManager ?= null
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Sen
     var x:Float = 0.0f
     var y:Float = 0.0f
     var z:Float = 0.0f
-    var threshold:Float = 1000.0f
+    var threshold:Float = 3000.0f
     var time:Long = 0
     companion object{
         const val MIN_DISTANCE = 150
@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Sen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.north)
         gestureDetector = GestureDetector(this, this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        pic = findViewById(R.id.home)
+        pic = findViewById(R.id.north)
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
@@ -58,13 +58,12 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Sen
                 val valX: Float = x2 - x1
                 val valY: Float = y2 - y1
 
-                if (Math.abs(valX) > MIN_DISTANCE) {
-                    if (x2 > x1) moveToWest()
-                    else if (x2 < x1) moveToEast()
-                }
                 if (Math.abs(valY) > MIN_DISTANCE) {
-                    if (y2 > y1) moveToSouth()
-                    else if (y1 > y2) moveToNorth()
+                    if (y2 > y1) {
+                        Toast.makeText(this,"Action not Allowed",Toast.LENGTH_LONG).show()
+                    } else if (y1 > y2) {
+                        moveToHome()
+                    }
                 }
             }
         }
@@ -113,20 +112,8 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Sen
         return false
     }
 
-    private fun moveToEast() {
-        startActivity(Intent(this, MainActivity2::class.java))
-        finish()
-    }
-    private fun moveToWest() {
-        startActivity(Intent(this, MainActivity3::class.java))
-        finish()
-    }
-    private fun moveToSouth() {
-        startActivity(Intent(this, MainActivity4::class.java))
-        finish()
-    }
-    private fun moveToNorth() {
-        startActivity(Intent(this, MainActivity5::class.java))
+    private fun moveToHome() {
+        startActivity(Intent(this, home::class.java))
         finish()
     }
 
