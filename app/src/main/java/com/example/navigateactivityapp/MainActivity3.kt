@@ -43,13 +43,15 @@ class MainActivity3 : AppCompatActivity(), GestureDetector.OnGestureListener, Se
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
-        gestureDetector.onTouchEvent(ev)
+        if (gestureDetector.onTouchEvent(ev)) {
+            return true
+        }
         when (ev.action) {
-            0->{
+            MotionEvent.ACTION_DOWN->{
                 x1 = ev.x
                 y1 = ev.y
             }
-            1->{
+            MotionEvent.ACTION_UP->{
                 x2 = ev.x
                 y2 = ev.y
 
